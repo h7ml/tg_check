@@ -73,6 +73,12 @@ jobs:
           mkdir -p $(dirname ./$(date +%Y/%m/%d).md)
           mv ./tg-signer.log ./$(date +%Y/%m/%d).md
           cp ./$(date +%Y/%m/%d).md ./log.md
+      - name: Set node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: translator
+        run: npx ai-markdown-translator@1.0.15 -i log.md -l "中文，并重新整理为markdown格式（要求整理标题和内容，要很好的区分每个对应的任务和内容）"
 
       - name: Commit and push changes
         run: |
