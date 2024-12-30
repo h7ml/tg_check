@@ -1,0 +1,83 @@
+{
+  "chats": [
+    {
+      "chat_id": 5617554994,
+      "sign_text": "/sign",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 7152090568,
+      "sign_text": "/signin",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 7390099785,
+      "sign_text": "/checkin",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 6811705378,
+      "sign_text": "/sign",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 6561491140,
+      "sign_text": "/qd",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 7184649669,
+      "sign_text": "/qd",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 6880480833,
+      "sign_text": "/sign",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 7930300752,
+      "sign_text": "/sign",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 6779714191,
+      "sign_text": "/sign",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 7608602072,
+      "sign_text": "/sign",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 7590446422,
+      "sign_text": "/sign_in",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    }
+  ],
+  "sign_at": "06:00:00",
+  "random_seconds": 0
+}

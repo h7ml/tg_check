@@ -1,0 +1,162 @@
+[
+    {
+        "id": 5617554994,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "zhihu_bot",
+        "first_name": "知乎社工库机器人",
+        "last_name": null
+    },
+    {
+        "id": 7152090568,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "ppsgk_bot",
+        "first_name": "屁屁侦探社工库机器人",
+        "last_name": null
+    },
+    {
+        "id": 7390099785,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "jrsgk1_bot",
+        "first_name": "巨人免费社工库【机器人】",
+        "last_name": null
+    },
+    {
+        "id": 6811705378,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "AnonymousSGKbot",
+        "first_name": "【ᯤ⁶ᴳ】哈希社工庫•𝙃𝙖𝙨𝙝𝙎𝙂𝙆",
+        "last_name": null
+    },
+    {
+        "id": 6561491140,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "tsfsgkbot",
+        "first_name": "275社工库-Bot",
+        "last_name": null
+    },
+    {
+        "id": 7184649669,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "Zonesgk_bot",
+        "first_name": "X-ray 智能机器人",
+        "last_name": null
+    },
+    {
+        "id": 6880480833,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "hh_liemo_bot",
+        "first_name": "liemo",
+        "last_name": null
+    },
+    {
+        "id": 7930300752,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "AI_SGKBOT",
+        "first_name": "AISGK",
+        "last_name": null
+    },
+    {
+        "id": 6779714191,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "DeepWebSGK_bot",
+        "first_name": "深网-社工库机器人",
+        "last_name": null
+    },
+    {
+        "id": 7608602072,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "AEON_SGKBOT",
+        "first_name": "免费永旺社工机器人",
+        "last_name": null
+    },
+    {
+        "id": 7590446422,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "sgkjiqirenbot",
+        "first_name": "社工库机器人",
+        "last_name": null
+    },
+    {
+        "id": 7065918251,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "XSJSGK_BOT",
+        "first_name": "新世界社工库",
+        "last_name": null
+    },
+    {
+        "id": -1002180328141,
+        "title": "屁屁侦探社签到群",
+        "type": "ChatType.SUPERGROUP",
+        "username": "ppsgk_sign",
+        "first_name": null,
+        "last_name": null
+    },
+    {
+        "id": -1001680975844,
+        "title": "ja-netfilter",
+        "type": "ChatType.SUPERGROUP",
+        "username": "ja_netfilter_group",
+        "first_name": null,
+        "last_name": null
+    },
+    {
+        "id": 5761705152,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "embykeeper_bot",
+        "first_name": "Emby 自动签到",
+        "last_name": null
+    },
+    {
+        "id": 777000,
+        "title": null,
+        "type": "ChatType.PRIVATE",
+        "username": null,
+        "first_name": "Telegram",
+        "last_name": null
+    },
+    {
+        "id": 5199199691,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "SGKgobot",
+        "first_name": "免费社工库机器人",
+        "last_name": null
+    },
+    {
+        "id": 6253050589,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "embykeeper_auth_bot",
+        "first_name": "Embykeeper Auth",
+        "last_name": null
+    },
+    {
+        "id": -1001373248101,
+        "title": "永旺担保",
+        "type": "ChatType.CHANNEL",
+        "username": "AEON_AA",
+        "first_name": null,
+        "last_name": null
+    },
+    {
+        "id": 1478760584,
+        "title": null,
+        "type": "ChatType.PRIVATE",
+        "username": "dext7r",
+        "first_name": "。",
+        "last_name": null
+    }
+]
