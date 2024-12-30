@@ -1,6 +1,7 @@
 # TG-Signer Action
 
 [![check](https://github.com/h7ml/tg_check/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/h7ml/tg_check/actions/workflows/check.yml)
+[日志](./log.md)
 
 一个基于 GitHub Actions 的 Telegram 签到自动化工具。
 
