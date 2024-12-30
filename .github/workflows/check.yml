@@ -49,8 +49,10 @@ jobs:
       - name: Show pip freeze
         run: |
           pip freeze
-
+      - name: echo tg-signer path
+        run: |
+          echo "tg-signer path is: $(which tg-signer)"
       - name: Run tg-signer
         run: |
           set -e
-          $(which tg-signer) path run-once
+          $(which tg-signer) run-once
