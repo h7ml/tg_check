@@ -1,6 +1,14 @@
 name: check
 
 on:
+  workflow_dispatch:
+    inputs:
+      python-version:
+        type: string
+        default: '3.10'
+        description: 'Python version to use'
+  schedule:
+    - cron: '0 6 * * *'
   push:
     branches:
       - main
@@ -14,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ['3.9']
+        python-version: ['3.10']
 
     steps:
       - name: Checkout repository
@@ -31,7 +39,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --no-cache-dir -U tg-signer
+          pip install --no-cache-dir -U tg-signer TgCrypto
 
       - name: Check tg-signer install path
         run: |
