@@ -8,7 +8,7 @@ on:
         default: '3.10'
         description: 'Python version to use'
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * *' # 每天 6 点执行
   push:
     branches:
       - main
@@ -16,7 +16,7 @@ on:
       - .signer/**/*.json
 
 jobs:
-  check:
+  setup:
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,9 +27,11 @@ jobs:
       TZ: Asia/Shanghai # 设置为东八区时间
 
     steps:
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Cache Python dependencies
       - name: Cache Python dependencies
         uses: actions/cache@v3
         with:
@@ -38,48 +40,86 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-python-${{ matrix.python-version }}-pip-deps-
 
+      # 3. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
+  install:
+    runs-on: ubuntu-latest
+    needs: setup # 确保先运行 setup
+
+    steps:
+      # 4. Upgrade pip
       - name: Upgrade pip
         run: |
           python -m pip install --upgrade pip
 
+      # 5. Install dependencies
       - name: Install dependencies
         run: |
           pip install --no-cache-dir -U tg-signer TgCrypto
         env:
           PIP_CACHE_DIR: ~/.cache/pip
 
-      - name: Check tg-signer install path
-        run: |
-          which tg-signer
-          echo "tg-signer path is: $(which tg-signer)"
+  check-tg-signer:
+    runs-on: ubuntu-latest
+    needs: install # 确保先运行 install
 
-      - name: Show pip freeze
+    steps:
+      # 6. Check tg-signer install path and show pip freeze
+      - name: Check tg-signer and show pip freeze
         run: |
+          echo "tg-signer path is: $(which tg-signer)"
           pip freeze
 
+      # 7. Run tg-signer
       - name: Run tg-signer
         run: |
           rm -rf ./tg-signer.log
           set -e
           $(which tg-signer) run-once
 
+  process-logs:
+    runs-on: ubuntu-latest
+    needs: check-tg-signer # 确保先运行 check-tg-signer
+
+    steps:
+      # 8. Rename log to md and copy
       - name: Rename log to md
         run: |
-          mkdir -p $(dirname ./$(date +%Y/%m/%d).md)
-          mv ./tg-signer.log ./$(date +%Y/%m/%d).md
-          cp ./$(date +%Y/%m/%d).md ./log.md
-      - name: Set node
+          log_path="./$(date +%Y/%m/%d).md"
+          mkdir -p $(dirname "$log_path")
+          mv ./tg-signer.log "$log_path"
+          cp "$log_path" ./log.md
+
+  setup-node:
+    runs-on: ubuntu-latest
+    needs: process-logs # 确保先运行 process-logs
+
+    steps:
+      # 9. Set up Node.js for translation
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - name: translator
+
+  translate-log:
+    runs-on: ubuntu-latest
+    needs: setup-node # 确保先运行 setup-node
+
+    steps:
+      # 10. Translator step to convert log to Chinese markdown
+      - name: Translate log to Chinese
         run: npx ai-markdown-translator@1.0.15 -i log.md -l "中文，并重新整理为markdown格式（要求整理标题和内容，要很好的区分每个对应的任务和内容）"
 
+  commit-and-push:
+    runs-on: ubuntu-latest
+    needs: translate-log # 确保先运行 translate-log
+
+    steps:
+      # 11. Commit and push changes
       - name: Commit and push changes
         run: |
           git config --local user.email "action@h7ml.cn"
