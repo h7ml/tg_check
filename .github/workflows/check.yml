@@ -23,7 +23,7 @@ jobs:
       matrix:
         python-version: ["${{ github.event.inputs.python-version || '3.10' }}"]
 
-    env: # 设置全局环境变量
+    env:
       TZ: Asia/Shanghai # 设置为东八区时间
 
     steps:
@@ -59,7 +59,7 @@ jobs:
       # 5. Install Python dependencies
       - name: Install dependencies
         run: |
-          pip install --no-cache-dir -U tg-signer TgCrypto
+          python -m pip install --no-cache-dir -U tg-signer TgCrypto
         env:
           PIP_CACHE_DIR: ~/.cache/pip
 
@@ -81,25 +81,33 @@ jobs:
     needs: install # 确保先运行 install
 
     steps:
-      # 8. Check tg-signer install path and show pip freeze
-      - name: Check tg-signer and show pip freeze
+      # 8. Print environment details for debugging
+      - name: Print environment details
         run: |
-          echo "tg-signer path is: $(which tg-signer)"
-          pip freeze
+          echo "Python path: $(which python)"
+          echo "Pip path: $(which pip)"
+          echo "TG-Signer path: $(python -m site --user-base)/bin/tg-signer"
+          echo "PATH: $PATH"
+          python -m pip freeze
 
-      # 9. Run tg-signer
+      # 9. Validate tg-signer commands
+      - name: Validate tg-signer commands
+        run: |
+          $(python -m site --user-base)/bin/tg-signer --help
+
+      # 10. Run tg-signer
       - name: Run tg-signer
         run: |
           rm -rf ./tg-signer.log
           set -e
-          $(which tg-signer) run-once
+          $(python -m site --user-base)/bin/tg-signer run-once
 
   process-logs:
     runs-on: ubuntu-latest
     needs: check-tg-signer # 确保先运行 check-tg-signer
 
     steps:
-      # 10. Rename log to md and copy
+      # 11. Rename log to md and copy
       - name: Rename log to md
         run: |
           log_path="./$(date +%Y/%m/%d).md"
@@ -112,7 +120,7 @@ jobs:
     needs: process-logs # 确保先运行 process-logs
 
     steps:
-      # 11. Set up Node.js for translation
+      # 12. Set up Node.js for translation
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -123,7 +131,7 @@ jobs:
     needs: setup-node # 确保先运行 setup-node
 
     steps:
-      # 12. Translator step to convert log to Chinese markdown
+      # 13. Translate log to Chinese markdown
       - name: Translate log to Chinese
         run: ai-markdown-translator -i log.md -l "中文，并重新整理为markdown格式（要求整理标题和内容，要很好的区分每个对应的任务和内容）"
 
@@ -132,7 +140,7 @@ jobs:
     needs: translate-log # 确保先运行 translate-log
 
     steps:
-      # 13. Commit and push changes
+      # 14. Commit and push changes
       - name: Commit and push changes
         run: |
           git config --local user.email "action@h7ml.cn"
