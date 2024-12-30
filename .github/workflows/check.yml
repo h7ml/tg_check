@@ -48,7 +48,7 @@ jobs:
 
   install:
     runs-on: ubuntu-latest
-    needs: setup # 确保先运行 setup
+    needs: setup
 
     steps:
       # 4. Upgrade pip
@@ -63,7 +63,17 @@ jobs:
         env:
           PIP_CACHE_DIR: ~/.cache/pip
 
-      # 6. Cache node modules
+      # 6. Verify tg-signer installation (and debug installation paths)
+      - name: Verify tg-signer installation
+        run: |
+          set -e
+          echo "Python executable: $(which python)"
+          echo "Pip executable: $(which pip)"
+          pip show tg-signer || echo "tg-signer was not installed!"
+          echo "Python user base: $(python -m site --user-base)"
+          echo "Contents of bin folder: $(ls $(python -m site --user-base)/bin || echo 'Bin folder is empty')"
+
+      # 7. Cache node modules
       - name: Cache node modules
         uses: actions/cache@v3
         with:
@@ -72,42 +82,40 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-modules-
 
-      # 7. Install Node.js dependencies
+      # 8. Install Node.js dependencies
       - name: Install ai-markdown-translator globally
         run: npm install -g ai-markdown-translator@1.0.15
 
   check-tg-signer:
     runs-on: ubuntu-latest
-    needs: install # 确保先运行 install
+    needs: install
 
     steps:
-      # 8. Print environment details for debugging
-      - name: Print environment details
+      # 9. Ensure PATH includes ~/.local/bin
+      - name: Ensure PATH for tg-signer
         run: |
-          echo "Python path: $(which python)"
-          echo "Pip path: $(which pip)"
-          echo "TG-Signer path: $(python -m site --user-base)/bin/tg-signer"
-          echo "PATH: $PATH"
-          python -m pip freeze
+          export PATH="$PATH:$(python -m site --user-base)/bin"
+          echo "PATH is now: $PATH"
 
-      # 9. Validate tg-signer commands
-      - name: Validate tg-signer commands
+      # 10. Validate tg-signer commands
+      - name: Validate tg-signer
         run: |
-          $(python -m site --user-base)/bin/tg-signer --help
+          set -e
+          tg-signer --help || echo "Unable to run tg-signer help"
 
-      # 10. Run tg-signer
+      # 11. Run tg-signer
       - name: Run tg-signer
         run: |
+          export PATH="$PATH:$(python -m site --user-base)/bin"
           rm -rf ./tg-signer.log
-          set -e
-          $(python -m site --user-base)/bin/tg-signer run-once
+          tg-signer run-once
 
   process-logs:
     runs-on: ubuntu-latest
-    needs: check-tg-signer # 确保先运行 check-tg-signer
+    needs: check-tg-signer
 
     steps:
-      # 11. Rename log to md and copy
+      # 12. Rename log to md and copy
       - name: Rename log to md
         run: |
           log_path="./$(date +%Y/%m/%d).md"
@@ -117,10 +125,10 @@ jobs:
 
   setup-node:
     runs-on: ubuntu-latest
-    needs: process-logs # 确保先运行 process-logs
+    needs: process-logs
 
     steps:
-      # 12. Set up Node.js for translation
+      # 13. Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -128,19 +136,19 @@ jobs:
 
   translate-log:
     runs-on: ubuntu-latest
-    needs: setup-node # 确保先运行 setup-node
+    needs: setup-node
 
     steps:
-      # 13. Translate log to Chinese markdown
+      # 14. Translate log to Chinese markdown
       - name: Translate log to Chinese
         run: ai-markdown-translator -i log.md -l "中文，并重新整理为markdown格式（要求整理标题和内容，要很好的区分每个对应的任务和内容）"
 
   commit-and-push:
     runs-on: ubuntu-latest
-    needs: translate-log # 确保先运行 translate-log
+    needs: translate-log
 
     steps:
-      # 14. Commit and push changes
+      # 15. Commit and push changes
       - name: Commit and push changes
         run: |
           git config --local user.email "action@h7ml.cn"
