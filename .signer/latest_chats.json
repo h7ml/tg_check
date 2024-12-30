@@ -1,5 +1,29 @@
 [
     {
+        "id": 6690063578,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "DingDangCats_Bot",
+        "first_name": "叮当猫机器人",
+        "last_name": null
+    },
+    {
+        "id": 7814776177,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "sgk2025bot",
+        "first_name": "零度社工机器人",
+        "last_name": null
+    },
+    {
+        "id": 6086709659,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "BUGSGK_BOT",
+        "first_name": "BUG社工库机器人",
+        "last_name": null
+    },
+    {
         "id": 5617554994,
         "title": null,
         "type": "ChatType.BOT",
@@ -88,18 +112,10 @@
         "last_name": null
     },
     {
-        "id": 7065918251,
-        "title": null,
-        "type": "ChatType.BOT",
-        "username": "XSJSGK_BOT",
-        "first_name": "新世界社工库",
-        "last_name": null
-    },
-    {
-        "id": -1002180328141,
-        "title": "屁屁侦探社签到群",
+        "id": -1002111050470,
+        "title": "🔰黑盒-𝑩𝒍𝒂𝒄𝒌 𝑩𝑶𝑿 -官方社区🅥",
         "type": "ChatType.SUPERGROUP",
-        "username": "ppsgk_sign",
+        "username": "BOX_SQ",
         "first_name": null,
         "last_name": null
     },
@@ -112,51 +128,35 @@
         "last_name": null
     },
     {
-        "id": 5761705152,
-        "title": null,
-        "type": "ChatType.BOT",
-        "username": "embykeeper_bot",
-        "first_name": "Emby 自动签到",
-        "last_name": null
-    },
-    {
-        "id": 777000,
-        "title": null,
-        "type": "ChatType.PRIVATE",
-        "username": null,
-        "first_name": "Telegram",
-        "last_name": null
-    },
-    {
-        "id": 5199199691,
-        "title": null,
-        "type": "ChatType.BOT",
-        "username": "SGKgobot",
-        "first_name": "免费社工库机器人",
-        "last_name": null
-    },
-    {
-        "id": 6253050589,
-        "title": null,
-        "type": "ChatType.BOT",
-        "username": "embykeeper_auth_bot",
-        "first_name": "Embykeeper Auth",
-        "last_name": null
-    },
-    {
-        "id": -1001373248101,
-        "title": "永旺担保",
-        "type": "ChatType.CHANNEL",
-        "username": "AEON_AA",
+        "id": -1002444858286,
+        "title": "零度社工库 - 聊天群",
+        "type": "ChatType.SUPERGROUP",
+        "username": "LD_2025",
         "first_name": null,
         "last_name": null
     },
     {
-        "id": 1478760584,
+        "id": -1002180328141,
+        "title": "屁屁侦探社签到群",
+        "type": "ChatType.SUPERGROUP",
+        "username": "ppsgk_sign",
+        "first_name": null,
+        "last_name": null
+    },
+    {
+        "id": 93372553,
         "title": null,
-        "type": "ChatType.PRIVATE",
-        "username": "dext7r",
-        "first_name": "。",
+        "type": "ChatType.BOT",
+        "username": "BotFather",
+        "first_name": "BotFather",
+        "last_name": null
+    },
+    {
+        "id": 5019201693,
+        "title": null,
+        "type": "ChatType.BOT",
+        "username": "GetBridgesBot",
+        "first_name": "Tor Bridges",
         "last_name": null
     }
 ]
