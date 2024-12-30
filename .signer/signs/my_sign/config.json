@@ -76,6 +76,20 @@
       "delete_after": 8,
       "text_of_btn_to_click": null,
       "choose_option_by_image": false
+    },
+    {
+      "chat_id": 6690063578,
+      "sign_text": "/qd",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
+    },
+    {
+      "chat_id": 6086709659,
+      "sign_text": "/signin",
+      "delete_after": 8,
+      "text_of_btn_to_click": null,
+      "choose_option_by_image": false
     }
   ],
   "sign_at": "06:00:00",

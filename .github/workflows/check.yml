@@ -23,9 +23,20 @@ jobs:
       matrix:
         python-version: ["${{ github.event.inputs.python-version || '3.10' }}"]
 
+    env: # 设置全局环境变量
+      TZ: Asia/Shanghai # 设置为东八区时间
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ matrix.python-version }}-pip-deps-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-${{ matrix.python-version }}-pip-deps-
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -39,6 +50,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --no-cache-dir -U tg-signer TgCrypto
+        env:
+          PIP_CACHE_DIR: ~/.cache/pip
 
       - name: Check tg-signer install path
         run: |
@@ -49,31 +62,24 @@ jobs:
         run: |
           pip freeze
 
-      - name: generate signer sign log
-        run: |
-          year=$(date +%Y)
-          month=$(date +%m)
-          day=$(date +%d)
-          rm -f "$year/$month/$day/sign.log"  # 删除旧日志
-          mkdir -p "$year/$month/$day"
-          touch "$year/$month/$day/sign.log"
-          echo "# Signer Log - $(date '+%Y-%m-%d')" > "$year/$month/$day/sign.log"
-          echo "## Environment" >> "$year/$month/$day/sign.log"
-          echo "\`\`\`" >> "$year/$month/$day/sign.log"
-          python --version >> "$year/$month/$day/sign.log"
-          pip freeze >> "$year/$month/$day/sign.log"
-          echo "\`\`\`" >> "$year/$month/$day/sign.log"
-
       - name: Run tg-signer
         run: |
+          rm -rf ./tg-signer.log
           set -e
-          $(which tg-signer) run-once | tee "$(date +%Y-%m-%d).md"
+          $(which tg-signer) run-once
 
-      - name: commit
+      - name: Rename log to md
+        run: |
+          mkdir -p $(dirname ./$(date +%Y/%m/%d).md)
+          mv ./tg-signer.log ./$(date +%Y/%m/%d).md
+
+      - name: Commit and push changes
         run: |
           git config --local user.email "action@h7ml.cn"
           git config --local user.name "GitHub Action"
           git config advice.ignoredHook false
-          git diff --quiet || git add .
+          git add ./$(date +%Y/%m/%d).md
           git commit -m "check $(date +%Y/%m/%d)" || echo "No changes to commit"
           git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
