@@ -12,9 +12,8 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    paths:
+      - .signer/**/*.json
 
 jobs:
   check:
@@ -22,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: [ ${{ github.event.inputs.python-version || '3.10' }} ]
 
     steps:
       - name: Checkout repository
@@ -49,10 +48,32 @@ jobs:
       - name: Show pip freeze
         run: |
           pip freeze
-      - name: echo tg-signer path
+
+      - name: generate signer sign log
         run: |
-          echo "tg-signer path is: $(which tg-signer)"
+          year=$(date +%Y)
+          month=$(date +%m)
+          day=$(date +%d)
+          rm -f "$year/$month/$day/sign.log"  # 删除旧日志
+          mkdir -p "$year/$month/$day"
+          touch "$year/$month/$day/sign.log"
+          echo "# Signer Log - $(date '+%Y-%m-%d')" > "$year/$month/$day/sign.log"
+          echo "## Environment" >> "$year/$month/$day/sign.log"
+          echo "\`\`\`" >> "$year/$month/$day/sign.log"
+          python --version >> "$year/$month/$day/sign.log"
+          pip freeze >> "$year/$month/$day/sign.log"
+          echo "\`\`\`" >> "$year/$month/$day/sign.log"
+
       - name: Run tg-signer
         run: |
           set -e
-          $(which tg-signer) run-once
+          $(which tg-signer) run-once | tee "$(date +%Y-%m-%d).md"
+
+      - name: commit
+        run: |
+          git config --local user.email "action@h7ml.cn"
+          git config --local user.name "GitHub Action"
+          git config advice.ignoredHook false
+          git diff --quiet || git add .
+          git commit -m "check $(date +%Y/%m/%d)" || echo "No changes to commit"
+          git push origin main
