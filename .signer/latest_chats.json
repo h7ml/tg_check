@@ -136,6 +136,14 @@
         "last_name": null
     },
     {
+        "id": -1001639833661,
+        "title": "GitHub Community",
+        "type": "ChatType.CHANNEL",
+        "username": null,
+        "first_name": null,
+        "last_name": null
+    },
+    {
         "id": -1001680975844,
         "title": "ja-netfilter",
         "type": "ChatType.SUPERGROUP",
@@ -144,18 +152,10 @@
         "last_name": null
     },
     {
-        "id": -1002444858286,
-        "title": "零度社工库 - 聊天群",
-        "type": "ChatType.SUPERGROUP",
-        "username": "LD_2025",
-        "first_name": null,
-        "last_name": null
-    },
-    {
-        "id": -1001639833661,
-        "title": "GitHub Community",
+        "id": -1002384990536,
+        "title": "巨人免费社工库【官方频道】",
         "type": "ChatType.CHANNEL",
-        "username": null,
+        "username": "sgk001_public",
         "first_name": null,
         "last_name": null
     }
