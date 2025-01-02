@@ -144,18 +144,18 @@
         "last_name": null
     },
     {
-        "id": -1001680975844,
-        "title": "ja-netfilter",
-        "type": "ChatType.SUPERGROUP",
-        "username": "ja_netfilter_group",
+        "id": -1001057039553,
+        "title": "智网 社工库机器人 频道",
+        "type": "ChatType.CHANNEL",
+        "username": "SGK_ksd",
         "first_name": null,
         "last_name": null
     },
     {
-        "id": -1002444858286,
-        "title": "零度社工库 - 聊天群",
+        "id": -1001680975844,
+        "title": "ja-netfilter",
         "type": "ChatType.SUPERGROUP",
-        "username": "LD_2025",
+        "username": "ja_netfilter_group",
         "first_name": null,
         "last_name": null
     }
